@@ -1,0 +1,110 @@
+# Smart Grocery Store Management System
+
+A simple console-based Python application that helps a local grocery store owner manage products, stock, sales and reports. It uses lists and dictionaries as its main data structures and requires no external libraries.
+
+## Features
+
+| Menu Option | Description |
+|---|---|
+| 1. Add New Product | Enter product details and add them to the store. Duplicate product IDs are rejected. |
+| 2. View All Products | Shows every product in a formatted table (ID, name, category, price, stock). |
+| 3. Search Product | Find products by ID or by name (case-insensitive, partial match). |
+| 4. Update Product Stock | Add stock to a product or set a new quantity. |
+| 5. Process Customer Sale | Checks the product exists and stock is sufficient, calculates the total, deducts stock and prints a purchase summary. |
+| 6. View Sales Records | Lists all completed sales. |
+| 7. Generate Store Report | Shows totals, low-stock products and the highest and lowest priced products. |
+| 8. Exit | Closes the program. |
+
+## Requirements
+
+- Python 3.6 or newer (uses f-strings)
+- No third-party packages
+
+## How to Run
+
+```bash
+python grocery_store.py
+```
+
+The menu appears and keeps running until you choose option 8.
+
+## Data Structures
+
+**Product** (stored in the `products` list):
+
+```python
+{
+    "id": 101,
+    "name": "Milk",
+    "category": "Dairy",
+    "price": 250,
+    "stock": 20
+}
+```
+
+**Sales record** (stored in the `sales_records` list):
+
+```python
+{
+    "id": 101,
+    "name": "Milk",
+    "quantity": 2,
+    "total": 500
+}
+```
+
+Three sample products are preloaded so you can test the program immediately. To start with an empty store, set `products = []` at the top of the file.
+
+## Store Report Contents
+
+- Total number of products
+- Total available stock
+- Total sales transactions
+- Total revenue generated
+- Products with stock below 5 units (`LOW_STOCK_LIMIT` can be changed in the code)
+- Product with the highest price
+- Product with the lowest price
+
+## Input Validation
+
+- Numeric fields (ID, price, stock, quantity) reject letters and negative values.
+- Text fields (name, category) cannot be empty.
+- Duplicate product IDs are not allowed.
+- A sale is refused if the product does not exist, is out of stock, or the requested quantity exceeds the available stock.
+- Invalid menu choices show an error message instead of crashing the program.
+
+## Project Structure
+
+```text
+.
+├── grocery_store.py   # Main application
+└── README.md          # Project documentation
+```
+
+## Code Overview
+
+| Function | Purpose |
+|---|---|
+| `get_int()`, `get_float()`, `get_text()` | Validated user input helpers |
+| `find_product_by_id()` | Looks up a product by its ID |
+| `print_product()` | Prints full details of one product |
+| `add_product()` | Menu option 1 |
+| `view_products()` | Menu option 2 |
+| `search_product()` | Menu option 3 |
+| `update_stock()` | Menu option 4 |
+| `process_sale()` | Menu option 5 |
+| `view_sales()` | Menu option 6 |
+| `generate_report()` | Menu option 7 |
+| `show_menu()`, `main()` | Menu display and main program loop |
+
+## Limitations
+
+- Data is stored in memory only, so products and sales are lost when the program closes.
+- Prices are handled as numbers with two-decimal display, without a currency symbol.
+
+## Possible Improvements
+
+- Save and load data using JSON or CSV files
+- Add product deletion and editing of price or name
+- Support multiple items in a single customer sale
+- Add date and time to each sales record
